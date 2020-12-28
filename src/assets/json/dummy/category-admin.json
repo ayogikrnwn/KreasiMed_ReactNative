@@ -1,0 +1,15 @@
+{
+    "data": [
+        {
+            "id" : 1,
+            "category" : "Admin 1"
+
+        },
+        {
+            "id" : 2,
+            "category" : "Admin 2"
+
+        }
+
+    ]
+}
