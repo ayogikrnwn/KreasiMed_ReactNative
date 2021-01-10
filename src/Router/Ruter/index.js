@@ -2,18 +2,21 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {
   GetStarted,
-//   Login,
-//   Register,
-//   Splash,
-//   UploadPhoto,
-//   Doctor,
-//   Hospitals,
-//   Messages,
-//   ChooseDoctor,
-//   Chat,
-//   UserProfile,
-//   UpdateProfile,
-//   DoctorProfile
+  Login,
+  Register,
+  Splash,
+  Home,
+  Chat,
+  ChooseAdmin
+  //   UploadPhoto,
+  //   Doctor,
+  //   Hospitals,
+  //   Messages,
+  //   ChooseDoctor,
+  //   Chat,
+  //   UserProfile,
+  //   UpdateProfile,
+  //   DoctorProfile
 } from '../../pages';
 // import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 // import {BottomNavigator} from '../../components';
@@ -35,7 +38,7 @@ const Stack = createStackNavigator();
 
 const Ruter = () => {
   return (
-    <Stack.Navigator initialRouteName="GetStarted">
+    <Stack.Navigator initialRouteName="Splash">
       <Stack.Screen
         name="Splash"
         component={Splash}
@@ -46,7 +49,7 @@ const Ruter = () => {
         component={GetStarted}
         options={{headerShown: false}}
       />
-      {/* <Stack.Screen
+      <Stack.Screen
         name="Register"
         component={Register}
         options={{headerShown: false}}
@@ -56,7 +59,22 @@ const Ruter = () => {
         component={Login}
         options={{headerShown: false}}
       />
-      <Stack.Screen
+       <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{headerShown: false}}
+      />
+       <Stack.Screen
+        name="Chat"
+        component={Chat}
+        options={{headerShown: false}}
+      />
+        <Stack.Screen
+        name="ChooseAdmin"
+        component={ChooseAdmin}
+        options={{headerShown: false}}
+      />
+      {/* <Stack.Screen
         name="UploadPhoto"
         component={UploadPhoto}
         options={{headerShown: false}}
@@ -90,7 +108,7 @@ const Ruter = () => {
         name="DoctorProfile"
         component={DoctorProfile}
         options={{headerShown: false}}
-      /> */}
+      />  */}
     </Stack.Navigator>
   );
 };

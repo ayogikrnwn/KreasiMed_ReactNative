@@ -1,6 +1,9 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import FlashMessage from 'react-native-flash-message';
 import { GetStarted, Splash, Register, Login, Home} from './pages';
+import { Ruter } from './Router';
 
 
 // import { NavigationContainer } from '@react-navigation/native';
@@ -8,7 +11,14 @@ import { GetStarted, Splash, Register, Login, Home} from './pages';
 
 
 const App = () => {
-  return <Home/>
+  return (
+    <>
+  <NavigationContainer>
+   <Ruter />
+    </NavigationContainer>  
+     <FlashMessage position="top" />
+     </>
+  )
 };
 
 

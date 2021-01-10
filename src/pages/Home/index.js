@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import {JSONCategoryAdmin, JSONCategoryObat} from '../../assets';
 import {
@@ -8,14 +8,59 @@ import {
   Header,
   AdminCategory,
 } from '../../component';
-import {colors, fonts} from '../../utils';
+import {Fire} from '../../config';
+import {colors, fonts, showError, getData} from '../../utils';
 
-const Home = () => {
+const Home = ({navigation}) => {
+  const [categoryObat, setCategoryObat] = useState([]);
+  const [categoryAdmin, setCategoryAdmin] = useState([]);
+
+  useEffect(() => {
+    getCategoryObat();
+    getCategoryAdmin();
+    //getTopRatedDoctors();
+    //getNews();
+    // navigation.addListener('focus', () => {
+    //   getUserData();
+  });
+  const getCategoryObat = () => {
+    Fire.database()
+      .ref('category_obat/')
+      .once('value')
+      .then(res => {
+        if (res.val()) {
+          const data = res.val();
+          const filterData = data.filter(el => el !== null);
+          setCategoryObat(filterData);
+        }
+      })
+      .catch(err => {
+        showError(err.message);
+      });
+  };
+
+  const getCategoryAdmin = () => {
+    Fire.database()
+      .ref('category_admin/')
+      .once('value')
+      .then(res => {
+        if (res.val()) {
+          const data = res.val();
+          const filterData = data.filter(el => el !== null);
+          setCategoryAdmin(filterData);
+        }
+      })
+      .catch(err => {
+        showError(err.message);
+      });
+  };
+
+
   return (
     <View style={styles.page}>
       <View style={styles.content}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <HomeProfile />
+          <HomeProfile onPress={() => navigation.navigate('ChooseAdmin')} />
 
           <View style={styles.wrapperSection}>
             <Text style={styles.welcome}>Cari Obat Berdasarkan Penyakit</Text>
@@ -24,12 +69,12 @@ const Home = () => {
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               <View style={styles.category}>
                 <Gap width={32} />
-                {JSONCategoryObat.data.map((item) => {
+                {categoryObat.map((item) => {
                   return (
                     <ObatCategory
-                      key={item.id}
+                      key={`category-${item.id}`}
                       category={item.category}
-                      //onPress={() => navigation.navigate('ChooseDoctor')}
+                      onPress={() => navigation.navigate('ChooseDoctor', item)}
                     />
                   );
                 })}
@@ -38,21 +83,20 @@ const Home = () => {
             </ScrollView>
           </View>
           <View style={styles.wrapperSection}>
-            <Text style={styles.welcome}>Cari Obat Berdasarkan Penyakit</Text>
+            <Text style={styles.welcome}>Hubungi Admin</Text>
           </View>
           <View style={styles.category}>
             <Gap width={32} />
-            {JSONCategoryAdmin.data.map((item) => {
-              return (
-                <AdminCategory
-                  key={item.id}
-                  category={item.category}
-                  //onPress={() => navigation.navigate('ChooseDoctor')}
-                />
+            {categoryAdmin.map((item) => {
+                  return (
+                    <AdminCategory
+                      key={`category-${item.id}`}
+                      category={item.category}
+                      onPress={() => navigation.navigate('ChooseDoctor', item)}
+                    />
               );
             })}
-              <Gap width={22} />
-            
+            <Gap width={22} />
           </View>
 
           <Gap height={30} />

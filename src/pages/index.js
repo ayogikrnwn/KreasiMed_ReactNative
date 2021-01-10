@@ -3,5 +3,7 @@ import GetStarted from './GetStarted';
 import Register from './Register';
 import Login from './Login';
 import Home from './Home';
+import Chat from './Chat'
+import ChooseAdmin from './ChooseAdmin'
 
-export {Splash, GetStarted, Register, Login, Home};
+export {Splash, GetStarted, Register, Login, Home, Chat, ChooseAdmin};

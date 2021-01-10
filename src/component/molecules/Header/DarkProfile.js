@@ -1,20 +1,20 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { colors, fonts } from '../../../utils';
-import { Button } from '../../atoms';
+import {StyleSheet, Text, View} from 'react-native';
+import {colors, fonts} from '../../../utils';
+import {Button} from '../../atoms';
 
 const DarkProfile = ({onPress}) => {
   return (
-    <View style={styles.container} onPress={onPress} >
+    <View style={styles.container} onPress={onPress}>
       <Button type="icon-only" icon="back-light" onPress={onPress} />
       <View style={styles.content}>
-        <Text style={styles.name}>Nairobi Putri Hayza</Text>
-        <Text style={styles.desc}>Dokter Anak</Text>
+        <Text style={styles.name}>Admin 1</Text>
+        <Text style={styles.desc}>06.00-18.00</Text>
       </View>
-  O
+      
     </View>
   );
-}
+};
 
 export default DarkProfile;
 
@@ -28,20 +28,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
-  content: {flex:1},
+  content: {flex: 1},
   avatar: {width: 46, height: 46, borderRadius: 46 / 2},
   name: {
-      fontSize: 20,
-      fontFamily: fonts.primary[600],
-      color: colors.white,
-      textAlign: 'center'
+    fontSize: 20,
+    fontFamily: fonts.primary[600],
+    color: colors.white,
+    textAlign: 'center',
   },
-  desc: { 
-      fontSize: 14,
+  desc: {
+    fontSize: 14,
     fontFamily: fonts.primary.normal,
     color: colors.text.secondary,
     marginTop: 6,
-    textAlign: 'center'}
-})
+    textAlign: 'center',
+  },
+});

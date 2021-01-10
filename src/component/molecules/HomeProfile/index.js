@@ -1,39 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {Button, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import { IconLC } from '../../../assets';
-import {colors, fonts} from '../../../utils';
-import { Gap } from '../../atoms';
+import {IconLC} from '../../../assets';
+import {colors, fonts, getData} from '../../../utils';
+import {Gap} from '../../atoms';
 
 const HomeProfile = ({onPress}) => {
-  //   const [profile, setProfile] = useState({
-  //     photo: ILNullPhoto,
-  //     fullName: '',
-  //     proffesion: '',
-  //   });
+  const [profile, setProfile] = useState({
+    fullName: '',
+    city: '',
+  });
 
-  //   useEffect(() => {
-  //     getData('user').then((res) => {
-  //       console.log('data user: ', res);
-  //       const data = res;
-  //       data.photo = {uri: res.photo};
-  //       setProfile(res);
-  //     });
-  //   }, []);
+  useEffect(() => {
+    getData('user').then((res) => {
+      console.log('data user: ', res);
+      const data = res;
+      setProfile(res);
+    });
+  }, []);
+
   return (
     <View style={styles.header}>
-      
-      <TouchableOpacity style={styles.container} onPress={onPress}>
+      <TouchableOpacity style={styles.container}>
         <View>
-          <Text style={styles.name}>Ayogi Kurniawan</Text>
-          <Text style={styles.profesion}>Kota Bandung</Text>
+          <Text style={styles.name}>{profile.fullName}</Text>
+          <Text style={styles.profesion}>{profile.city}</Text>
         </View>
-      
       </TouchableOpacity>
-      <TouchableOpacity style={styles.icon}>
+      <TouchableOpacity style={styles.icon} onPress={onPress}>
+        <IconLC />
+      </TouchableOpacity>
 
-      <IconLC  />
-      </TouchableOpacity>
-     
       <Gap height={24} />
     </View>
   );
@@ -49,12 +45,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,   
-    flex: 1
+    borderBottomRightRadius: 20,
+    flex: 1,
   },
   container: {flexDirection: 'row'},
   icon: {
-    marginLeft: 165
+    marginLeft: 165,
   },
   name: {
     fontSize: 24,
