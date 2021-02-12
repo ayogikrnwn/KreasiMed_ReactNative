@@ -16,47 +16,57 @@ const Register = ({navigation}) => {
     city: '',
     email: '',
     password: '',
-  })
+  });
 
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   const onContinue = () => {
     console.log(form);
 
     setLoading(true);
-    Fire.auth()
-      .createUserWithEmailAndPassword(form.email, form.password)
-      .then((success) => {
-        setLoading(false);
-        setForm('reset');
 
-        const data = {
-          fullName: form.fullName,
-          city: form.city,
-          email: form.email,
-          uid: success.user.uid
-        }
-        Fire.database()
-          .ref('users/' + success.user.uid + '/')
-          .set(data);
+    if (form.fullName && form.city) {
+      Fire.auth()
+        .createUserWithEmailAndPassword(form.email, form.password)
+        .then((success) => {
+          setLoading(false);
+          setForm('reset');
 
-        storeData('user', data);
-        navigation.navigate('Home', data);
-        console.log('register success :', success);
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        setLoading(false);
-        showMessage({
-          message: errorMessage,
-          type: 'default',
-          backgroundColor: colors.error,
-          color: colors.white
+          const data = {
+            fullName: form.fullName,
+            city: form.city,
+            email: form.email,
+            uid: success.user.uid,
+          };
+          Fire.database()
+            .ref('users/' + success.user.uid + '/')
+            .set(data);
+
+          storeData('user', data);
+          navigation.navigate('Home', data);
+          console.log('register success :', success);
+        })
+        .catch((error) => {
+          const errorMessage = error.message;
+          setLoading(false);
+          showMessage({
+            message: errorMessage,
+            type: 'default',
+            backgroundColor: colors.error,
+            color: colors.white,
+          });
         });
+    } else {
+      setLoading(false);
+      showMessage({
+        message: 'Nama/Kota Asal cannot be empty',
+        type: 'default',
+        backgroundColor: colors.error,
+        color: colors.white,
       });
-  };  
+    }
+  };
 
- 
   return (
     <>
       <View style={styles.page}>
@@ -95,7 +105,7 @@ const Register = ({navigation}) => {
       {loading && <Loading />}
     </>
   );
-}
+};
 
 export default Register;
 

@@ -2,25 +2,24 @@
     "data": [
         {
             "id" : 1,
-            "category" : "Demam"
+            "category" : "Sanmol Drops"
 
         },
         {
             "id" : 2,
-            "category" : "Batuk"
+            "category" : "Sanmol Drops"
 
         },
         {
             "id" : 3,
-            "category" : "Flu"
+            "category" : "Sanmol Drops"
 
         },
         {
             "id" : 4,
-            "category" : "Sakit Tenggorokan"
+            "category" : "Sanmol Drops"
 
-        },
-        
+        }
 
     ]
 }

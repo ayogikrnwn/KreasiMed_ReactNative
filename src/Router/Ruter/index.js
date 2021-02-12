@@ -7,7 +7,12 @@ import {
   Splash,
   Home,
   Chat,
-  ChooseAdmin
+  ChooseAdmin,
+  ChooseObat,
+  ProfileObat,
+  Messages,
+  PilihAdmin,
+  AdminProfile
   //   UploadPhoto,
   //   Doctor,
   //   Hospitals,
@@ -72,6 +77,31 @@ const Ruter = () => {
         <Stack.Screen
         name="ChooseAdmin"
         component={ChooseAdmin}
+        options={{headerShown: false}}
+      />
+        <Stack.Screen
+        name="ChooseObat"
+        component={ChooseObat}
+        options={{headerShown: false}}
+      />
+       <Stack.Screen
+        name="ProfileObat"
+        component={ProfileObat}
+        options={{headerShown: false}}
+      />
+       <Stack.Screen
+        name="Messages"
+        component={Messages}
+        options={{headerShown: false}}
+      />
+       <Stack.Screen
+        name="PilihAdmin"
+        component={PilihAdmin}
+        options={{headerShown: false}}
+      />
+       <Stack.Screen
+        name="AdminProfile"
+        component={AdminProfile}
         options={{headerShown: false}}
       />
       {/* <Stack.Screen

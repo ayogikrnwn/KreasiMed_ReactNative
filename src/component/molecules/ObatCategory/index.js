@@ -5,16 +5,16 @@ import { colors, fonts } from '../../../utils';
 
 const ObatCategory = ({category, onPress}) => {
   const Icon = () => {
-    if (category === 'Demam') {
+    if (category == 'Demam') {
       return <ILCDemam style={styles.illustration} />;
     }
     if (category == 'Batuk') {
       return <ILCBatuk style={styles.illustration}/>;
     }
-    if (category === 'Sakit Kepala'){
+    if (category == 'Flu dan Sakit Kepala'){
       return <ILCSkep style={styles.illustration}/>
     }
-    return <ILCStengg style={styles.illustration} />
+    return <ILCSkep style={styles.illustration} />
   }
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>

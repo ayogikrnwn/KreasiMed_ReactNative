@@ -1,30 +1,24 @@
-import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { IconChat, ILADMD, ILADMS } from '../../../assets';
-import { colors, fonts } from '../../../utils';
+import React from 'react'
+import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
+import {DummyDoctor, IconStar} from '../../../assets';
+import {colors, fonts} from '../../../utils';
 
-const AdminCategory = ({category, onPress}) => {
-  const Icon = () => {
-    if (category === 'Admin 1') {
-        return <ILADMS style={styles.illustration} />;
-      }
-      if (category == 'Admin 2') {
-        return <ILADMS style={styles.illustration}/>;
-      }
-     
-      return <ILADMS style={styles.illustration} />
-    }
+const AdminCategory = ({onPress, name, desc, avatar}) => {
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
-     <Icon />
-      
-      <Text style={styles.category}>{category}</Text>
-      <Text style={styles.label}>24 Jam</Text>
+      <Image source={avatar} style={styles.avatar} />
+      <View style={styles.profile}>
+        <Text style={styles.name}>{name}</Text>
+        <Text style={styles.category}>{desc}</Text>
+      </View>
 
-      <TouchableOpacity style={styles.buton}>
-      <IconChat/>
-      </TouchableOpacity>
-      
+      <View style={styles.rate}>
+        <IconStar />
+        <IconStar />
+        <IconStar />
+        <IconStar />
+        <IconStar />
+      </View>
     </TouchableOpacity>
   );
 }
@@ -33,33 +27,23 @@ export default AdminCategory;
 
 const styles = StyleSheet.create({
   container: {
-    padding: 12,
-    backgroundColor: colors.cardLight,
-    alignSelf: 'flex-start',
-    borderRadius: 10,
-    marginRight: 25,
-    width: 150,
-    height: 190,
-    
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingBottom: 16,
+    alignItems: 'center',
   },
-  illustration: {
-    marginBottom: 28,
-  },
-  label: {
-    fontSize: 12,
-    textAlign: 'center',
-    fontFamily: fonts.primary[300],
+  avatar: {width: 50, height: 50, borderRadius: 50 / 2, marginRight: 12},
+  rate: {flexDirection: 'row'},
+  name: {
+    fontSize: 16,
+    fontFamily: fonts.primary[600],
     color: colors.text.primary,
   },
   category: {
-    fontSize: 16,
-    textAlign: 'center',
-    marginTop: -10,
-    fontFamily: fonts.primary[900],
-    color: colors.text.primary,
-
+    fontSize: 12,
+    fontFamily: fonts.primary.normal,
+    color: colors.text.secondary,
+    marginTop: 2,
   },
-  buton: {
-        alignItems: 'center'
-  },
+  profile: {flex: 1},
 })

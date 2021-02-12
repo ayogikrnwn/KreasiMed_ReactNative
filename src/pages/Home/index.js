@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, View, ScrollView} from 'react-native';
+import {StyleSheet, Text, View, ScrollView, Linking} from 'react-native';
 import {JSONCategoryAdmin, JSONCategoryObat} from '../../assets';
 import {
   ObatCategory,
@@ -7,60 +7,85 @@ import {
   HomeProfile,
   Header,
   AdminCategory,
+  SectionChat,
+  Kuesioner,
 } from '../../component';
 import {Fire} from '../../config';
 import {colors, fonts, showError, getData} from '../../utils';
 
 const Home = ({navigation}) => {
   const [categoryObat, setCategoryObat] = useState([]);
-  const [categoryAdmin, setCategoryAdmin] = useState([]);
-
+  
   useEffect(() => {
     getCategoryObat();
-    getCategoryAdmin();
-    //getTopRatedDoctors();
+    //getCategoryAdmin();
+    // getTopRatedDoctors();
     //getNews();
     // navigation.addListener('focus', () => {
     //   getUserData();
   });
+
+  // const getTopRatedDoctors = () => {
+  //   Fire.database()
+  //     .ref('doctors/')
+  //     .orderByChild('rate')
+  //     .limitToLast(3)
+  //     .once('value')
+  //     .then((res) => {
+  //       if (res.val()) {
+  //         const oldData = res.val();
+  //         const data = [];
+  //         Object.keys(oldData).map((key) => {
+  //           data.push({
+  //             id: key,
+  //             data: oldData[key],
+  //           });
+  //         });
+  //         setDoctors(data);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       showError(err.message);
+  //     });
+  // };
+
   const getCategoryObat = () => {
     Fire.database()
       .ref('category_obat/')
       .once('value')
-      .then(res => {
+      .then((res) => {
         if (res.val()) {
           const data = res.val();
-          const filterData = data.filter(el => el !== null);
+          const filterData = data.filter((el) => el !== null);
           setCategoryObat(filterData);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         showError(err.message);
       });
   };
 
-  const getCategoryAdmin = () => {
-    Fire.database()
-      .ref('category_admin/')
-      .once('value')
-      .then(res => {
-        if (res.val()) {
-          const data = res.val();
-          const filterData = data.filter(el => el !== null);
-          setCategoryAdmin(filterData);
-        }
-      })
-      .catch(err => {
-        showError(err.message);
-      });
-  };
-
+  // const getCategoryAdmin = () => {
+  //   Fire.database()
+  //     .ref('category_admin/')
+  //     .once('value')
+  //     .then(res => {
+  //       if (res.val()) {
+  //         const data = res.val();
+  //         const filterData = data.filter(el => el !== null);
+  //         setCategoryAdmin(filterData);
+  //       }
+  //     })
+  //     .catch(err => {
+  //       showError(err.message);
+  //     });
+  // };
 
   return (
     <View style={styles.page}>
       <View style={styles.content}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <HomeProfile onPress={() => navigation.navigate('ChooseAdmin')} />
+          <HomeProfile onPress={() => navigation.navigate('Messages')} />
 
           <View style={styles.wrapperSection}>
             <Text style={styles.welcome}>Cari Obat Berdasarkan Penyakit</Text>
@@ -72,9 +97,9 @@ const Home = ({navigation}) => {
                 {categoryObat.map((item) => {
                   return (
                     <ObatCategory
-                      key={`category-${item.id}`}
+                      key={item.id}
                       category={item.category}
-                      onPress={() => navigation.navigate('ChooseDoctor', item)}
+                      onPress={() => navigation.navigate('ChooseObat', item)}
                     />
                   );
                 })}
@@ -84,18 +109,22 @@ const Home = ({navigation}) => {
           </View>
           <View style={styles.wrapperSection}>
             <Text style={styles.welcome}>Hubungi Admin</Text>
-          </View>
-          <View style={styles.category}>
-            <Gap width={32} />
-            {categoryAdmin.map((item) => {
-                  return (
-                    <AdminCategory
-                      key={`category-${item.id}`}
-                      category={item.category}
-                      onPress={() => navigation.navigate('ChooseDoctor', item)}
-                    />
+            <SectionChat onPress={() => navigation.navigate('PilihAdmin')} />
+            <Gap width={28} />
+            <Kuesioner onPress={() => {
+              Linking.openURL('http://bit.ly/KuesionerKreasi')
+            }} />
+            {/* {doctors.map((doctor) => {
+              return (
+                <AdminCategory
+                  key={doctor.id}
+                  name={doctor.data.fullName}
+                  desc={doctor.data.profession}
+                  avatar={{uri: doctor.data.photo}}
+                  onPress={() => navigation.navigate('AdminProfile', doctor)}
+                />
               );
-            })}
+            })} */}
             <Gap width={22} />
           </View>
 

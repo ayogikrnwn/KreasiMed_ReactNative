@@ -1,20 +1,20 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Image,StyleSheet, Text, View} from 'react-native';
 import {colors, fonts} from '../../../utils';
 import {Button} from '../../atoms';
 
-const DarkProfile = ({onPress}) => {
+const DarkProfile = ({onPress, title, desc, photo}) => {
   return (
-    <View style={styles.container} onPress={onPress}>
+    <View style={styles.container} onPress={onPress} >
       <Button type="icon-only" icon="back-light" onPress={onPress} />
       <View style={styles.content}>
-        <Text style={styles.name}>Admin 1</Text>
-        <Text style={styles.desc}>06.00-18.00</Text>
+        <Text style={styles.name}>{title}</Text>
+        <Text style={styles.desc}>{desc}</Text>
       </View>
-      
+      <Image source={photo} style={styles.avatar} />
     </View>
   );
-};
+}
 
 export default DarkProfile;
 
